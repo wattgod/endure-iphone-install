@@ -10,7 +10,7 @@ command -v gh >/dev/null || die "Install GitHub CLI: brew install gh"
 
 if ! gh auth status -h github.com >/dev/null 2>&1; then
   echo "A browser will open. Log in as wattgod."
-  gh auth login -h github.com -p https -w
+  gh auth login -h github.com -p https -w --skip-ssh-key
 fi
 
 if [[ -d "$DEST/.git" ]]; then
