@@ -1,16 +1,22 @@
 # Endure iPhone install
 
-gh is already installed on the mattidev Mac. Next:
+One-command installer for the **mattidev** Mac. Uses GitHub CLI HTTPS (no SSH key). Starts an **internal Expo / EAS** build — not USB Xcode signing.
+
+Do **not** clone onto the Seagate Time Machine volume. Do **not** use Peaksware Apple or Expo accounts.
 
 ```bash
-set -euo pipefail
-cd /Users/mattidev
-gh auth status -h github.com >/dev/null 2>&1 || gh auth login -h github.com -p https -w --skip-ssh-key
-gh repo clone wattgod/endure-mobile /Users/mattidev/endure-mobile
-cd /Users/mattidev/endure-mobile
-test -f package.json
-npm ci
-npm run ios:install
+curl -fsSL https://raw.githubusercontent.com/wattgod/endure-iphone-install/main/install.sh | bash
 ```
 
-Do not use `git clone git@github.com:...`.
+Or, if `/Users/mattidev/endure-mobile` already exists:
+
+```bash
+cd /Users/mattidev/endure-mobile
+git checkout main
+git pull
+npm run ios:launch
+```
+
+Expo account **wattgod**. Apple ID **stormspandies@gmail.com** / team **Endure Labs LLC**. When EAS asks to register a device, say yes — UDID `06F79867-B55E-53C7-B05C-4CB996122507`. When the build finishes, open the Expo install page on the iPhone (Safari). Developer Mode on.
+
+USB later: `npm run ios:retry` or Xcode EndureLabs → Team → Endure Labs LLC → ⌘R.
